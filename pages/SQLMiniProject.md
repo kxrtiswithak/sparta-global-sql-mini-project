@@ -5,8 +5,6 @@
 </p>
 <h1 align="center">:globe_with_meridians: SQL Mini Project :globe_with_meridians:</h1>
 
----
-
 ## Table of Contents
 
 #### [Introduction :boom:](#intro)   
@@ -16,8 +14,6 @@
 #### [Standards :closed_book:](#standards)   
 
 <div id='intro'/>
-
----
 
 ## Introduction :boom:
 
@@ -36,7 +32,7 @@ _This exercise requires you to know the following aspects of SQL:_
 
 <div id='ex1'/>
 
----
+
 
 ## Exercise 1 – Northwind Queries :tornado: _(40 marks: 5 for each question)_
 
@@ -255,8 +251,6 @@ _This exercise requires you to know the following aspects of SQL:_
 
 <div id='ex2'/>
 
----
-
 ## Exercise 2 – Create Spartans Table :shield: _(20 marks – 10 each)_
 
 1. _**Write the correct SQL statement to create the following table:**_
@@ -324,8 +318,6 @@ _This exercise requires you to know the following aspects of SQL:_
 | 10         | Mr.   | Steve      | Austin    | King\'s College London    | English Language and Linguistics | 2:2           |
 
 <div id='ex3'/>
-
----
 
 ## Exercise 3 – Northwind Data Analysis linked to Excel :monocle_face: _(30 marks)_
 
@@ -501,8 +493,6 @@ _This exercise requires you to know the following aspects of SQL:_
 </p>
 
 <div id='standards'/>
-
----
 
 ## Standards :closed_book: _(10 marks)_
 
