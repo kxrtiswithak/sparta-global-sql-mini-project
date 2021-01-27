@@ -43,6 +43,8 @@ _This exercise requires you to know the following aspects of SQL:_
 1. _**Write a query that lists all Customers in either Paris or London. Include Customer ID, Company Name and all address fields.**_    
 
 ###### Query
+
+I attempted to adopt this [SQL Style Guide](https://www.sqlstyle.guide/) for my indentation to make my queries as readable as possible. I try to implement column aliasing wherever I can to ensure accuracy and prevent errors, as well as Azure providing code completion when doing so. I concatenated all the address columns for simplicity.
       
 ```sql
     SELECT c.CustomerID AS "Customer ID", 
@@ -75,6 +77,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
+I opted to use a wildcard on the only column in the table where the term `bottles` was present.
+
 ```sql
     SELECT p.ProductName AS "Product Name"
       FROM Products AS p
@@ -102,6 +106,8 @@ _This exercise requires you to know the following aspects of SQL:_
 3. _**Repeat question above, but add in the Supplier Name and Country.**_
 
 ###### Query
+
+A simple `JOIN` sufficed adding the two desired columns.
 
 ```sql
     SELECT p.ProductName AS "Product Name", 
@@ -135,6 +141,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
+Due to category names being unique, I could group by this column, otherwise I would have simply stuck to Category ID. Order by allowed me to list the highest number first.
+
 ```sql
     SELECT c.CategoryName AS "Category Name",
            COUNT(p.ProductID) AS "No. of Items"
@@ -164,8 +172,12 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
+I opted to combine name related columns together, as well as aliasing the columns identical to the question wording.
+
 ```sql
-    SELECT CONCAT(e.TitleOfCourtesy, ' ', e.FirstName, ' ', e.LastName) AS "Employee Name",
+    SELECT CONCAT(e.TitleOfCourtesy, ' ', 
+                  e.FirstName, ' ', 
+                  e.LastName) AS "Employee Name",
            e.City AS "City of Residence"
       FROM Employees AS e 
 ```
@@ -189,6 +201,8 @@ _This exercise requires you to know the following aspects of SQL:_
 6. _**List Sales Totals for all Sales Regions (via the Territories table using 4 joins) with a Sales Total greater than 1,000,000. Use rounding or FORMAT to present the numbers.**_ 
 
 ###### Query
+
+Due to only being restricted to using 4 joins, I could not combine `territories` with `region` whilst also linking to `[Order Details]`, and so could not include `region_description`, something I would have liked to. I chose to format the Sales Total as USD with 2 decimal places, the database of american origin as far as I know. I initially attempted a `WHERE` clause, but due to needing to carry out arithmetic operations, switched to `HAVING`.
 
 ```sql
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
@@ -219,6 +233,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 7. _**Count how many Orders have a Freight amount greater than 100.00 and either USA or UK as Ship Country.**_
 
+Pretty self explanatory and straightforward.
+
 ###### Query
 
 ```sql
@@ -237,6 +253,8 @@ _This exercise requires you to know the following aspects of SQL:_
 <br>
 
 8. _**Write an SQL Statement to identify the Order Number of the Order with the highest amount(value) of discount applied to that order.**_
+
+I used `TOP 1`, since only a single highest value has ben asked for, using `ORDER BY` to ensure this value is the highest. Again, I have formatted the value to USD.
 
 ###### Query
 
@@ -265,6 +283,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
+I decided that all values should not be null, since Sparta Global would require all this information about each of their consultants. To ensure the table was successfully created, I ran the `SELECT` as well.
+
 ```sql
     CREATE TABLE spartans_table
     (
@@ -289,6 +309,8 @@ _This exercise requires you to know the following aspects of SQL:_
 <br>
 
 2. _**Write SQL statements to add the details of the Spartans in your course to the table you have created.**_
+
+I chose to state the columns I was inputting, so as to ensure no errors occured from attempting to input into `spartan_id`, since it is auto-incrementing.
 
 ###### Query
 
@@ -333,6 +355,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
+Prior to attempting this query, I was not aware one could join a table to itself, something that I was pleasantly surprised by.
+
 ```sql
     SELECT CONCAT(e.FirstName, ' ', e.LastName) AS "Employee Name",
            CONCAT(b.FirstName, ' ', b.LastName) AS "Reports To"
@@ -359,6 +383,8 @@ _This exercise requires you to know the following aspects of SQL:_
 2. **_List all Suppliers with total sales over $10,000 in the Order Details table. Include the Company Name from the Suppliers Table and present as a bar chart_ (5 Marks)**
 
 ###### Query
+
+I initially tried formatting Sales Total as USD, but encountered some issues when creating the bar chart, therefore sitcking to just `CONVERT`, in order to limit decimal places.
 
 ```sql
     SELECT s.CompanyName AS "Company Name",
@@ -406,6 +432,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Bar Chart
 
+I chose to order by company name rather than Sales Total, thus giving a less uniform look to the data, instead providing variance. There is, however, [the bar chart ordered by Sales Total](../img//barchart_ordered_by_sales_total.png) for those that prefer it. 
+
 <p align="center">
   <a href="../img/barchart_ordered_by_company_name.png">
     <img alt="Suppliers With Total Sales over $10K" src="../img/barchart_ordered_by_company_name.png" width="750" />
@@ -417,6 +445,8 @@ _This exercise requires you to know the following aspects of SQL:_
 3. **_List the Top 10 Customers YTD for the latest year in the Orders file. Based on total value of orders shipped. No Excel required._ (10 Marks)**
 
 ###### Query
+
+I intially hard coded the latest year, but after gaining some feedback from my trainer, reluctantly implement a subquery to find it. I must admit it is a safer and future proof approach.
 
 ```sql
     SELECT TOP 10 c.CompanyName,
@@ -456,6 +486,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
+I extracted the first 7 characters from Order Date, converting it into a date format that I could order by month and year using one column. I used `DATEDIFF` to get the ship time and `AVG` to aggregate it, grouping it by the new `Date` column I had created and aliased, being able to `ORDER BY` said alias due to SQL processing `SELECT` before `ORDER BY`. `GROUP BY`, however, does not, and `Average Ship Time (Days)` could not be used there (I added `(Days)` with the line chart in mind).
+
 ```sql
     SELECT DISTINCT LEFT(CONVERT(char, o.OrderDate, 20), 7) AS "Date",
            AVG(DATEDIFF(day, o.OrderDate, o.ShippedDate))  AS "Average Ship Time (Days)"
@@ -494,6 +526,8 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Line Chart
 
+Little explanation is rquired. I encountered some minor difficulty when formatting the date, due to Excel classing `Date` as text, nothing a quick ~~google~~ DuckDuckGo couldn't fix.
+
 <p align="center">
   <a href="../img/linechart.png">
     <img alt="Average Ship Time By Month" src="../img/linechart.png" width="750" />
@@ -506,9 +540,11 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ## Standards :closed_book: _(10 marks)_
 
-Remember to apply all the following standards:
-- Use consistent capitalisation and indentation of SQL Statements
-- Use concise and consistent table alias names
-- Use column aliases to ensure tidy column headings (spaces and consistent capitalisation)
-- Concatenate any closely related columns e.g. First Name and Last Name or Address and City etc
-- Put comments throughout
+_Remember to apply all the following standards:_
+- [x] _Use consistent capitalisation and indentation of SQL Statements_
+- [x] _Use concise and consistent table alias names_
+- [x] _Use column aliases to ensure tidy column headings (spaces and consistent capitalisation)_
+- [x] _Concatenate any closely related columns e.g. First Name and Last Name or Address and City etc_
+- [x] _Put comments throughout_
+
+I believe I have completed everything as desired.

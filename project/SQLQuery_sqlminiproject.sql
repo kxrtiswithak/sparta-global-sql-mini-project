@@ -37,9 +37,11 @@ USE Northwind;
      ORDER BY "No. of Items" DESC;
 
     -- 1.5	List all UK employees using concatenation to join their title of courtesy, first name and last name together. Also include their city of residence.
-    SELECT CONCAT(e.TitleOfCourtesy, ' ', e.FirstName, ' ', e.LastName) AS "Employee Name",
+    SELECT CONCAT(e.TitleOfCourtesy, ' ', 
+                  e.FirstName, ' ', 
+                  e.LastName) AS "Employee Name",
            e.City AS "City of Residence"
-      FROM Employees AS e;
+      FROM Employees AS e 
       
     -- 1.6	List Sales Totals for all Sales Regions (via the Territories table using 4 joins) with a Sales Total greater than 1,000,000. Use rounding or FORMAT to present the numbers. 
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
