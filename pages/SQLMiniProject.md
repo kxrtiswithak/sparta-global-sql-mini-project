@@ -526,7 +526,7 @@ I extracted the first 7 characters from Order Date, converting it into a date fo
 
 ###### Line Chart
 
-Little explanation is rquired. I encountered some minor difficulty when formatting the date, due to Excel classing `Date` as text, nothing a quick ~~google~~ DuckDuckGo couldn't fix.
+Little explanation is required. I encountered some minor difficulty when formatting the date, due to Excel classing `Date` as text, nothing a quick ~~google~~ DuckDuckGo couldn't fix.
 
 <p align="center">
   <a href="../img/linechart.png">
