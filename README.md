@@ -18,5 +18,5 @@ The majority of queries were conducted on the [Northwind sample database](https:
 </p>
 
 
-Queries and reponses can be found [here](pages/SQLMiniProject.md)
+Queries and responses can be found [here](pages/SQLMiniProject.md)
 
