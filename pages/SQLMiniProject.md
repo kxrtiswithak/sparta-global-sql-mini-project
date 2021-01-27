@@ -327,7 +327,7 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ---
 
-## Exercise 3 – Northwind Data Analysis linked to Excel :monocle_face: :monocle_face: _(30 marks)_
+## Exercise 3 – Northwind Data Analysis linked to Excel :monocle_face: _(30 marks)_
 
 1. **_List all Employees from the Employees table and who they report to. No Excel required. Include Employee names and ReportTo names._ (5 Marks)**
 
