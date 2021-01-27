@@ -308,7 +308,7 @@ _This exercise requires you to know the following aspects of SQL:_
     ('Mr.', 'Steve', 'Austin', 'King’s College London', 'English Language and Linguistics', '2:2');
 ```
 
-###### Response
+###### Response
 
 | spartan_id | title | first_name | last_name | uni_attended               | course_taken                     | mark_achieved |
 |------------|-------|------------|-----------|----------------------------|----------------------------------|---------------|
