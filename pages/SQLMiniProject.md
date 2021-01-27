@@ -11,7 +11,7 @@
 
 #### [Introduction :boom:](#intro)   
 #### [Exercise 1 :tornado:](#ex1)   
-#### [Exercise 2 :shield:](#ex2)   
+#### [Exercise 2 :shield:](#ex2)   
 #### [Exercise 3 :monocle_face:](#ex3)   
 #### [Standards :closed_book:](#standards)   
 
