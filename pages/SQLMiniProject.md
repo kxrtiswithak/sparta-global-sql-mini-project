@@ -107,7 +107,7 @@ I opted to use a wildcard on the only column in the table where the term `bottle
 
 ###### Query
 
-A simple `JOIN` sufficed adding the two desired columns.
+A simple `JOIN` sufficed for adding the two desired columns.
 
 ```sql
     SELECT p.ProductName AS "Product Name", 
@@ -141,7 +141,7 @@ A simple `JOIN` sufficed adding the two desired columns.
 
 ###### Query
 
-Due to category names being unique, I could group by this column, otherwise I would have simply stuck to Category ID. Order by allowed me to list the highest number first.
+Due to category names being unique, I could group by this column, otherwise I would have simply stuck to Category ID. `ORDER BY` allowed me to list the highest number first.
 
 ```sql
     SELECT c.CategoryName AS "Category Name",
@@ -172,7 +172,7 @@ Due to category names being unique, I could group by this column, otherwise I wo
 
 ###### Query
 
-I opted to combine name related columns together, as well as aliasing the columns identical to the question wording.
+I opted to combine Employee Name related columns together, as well as aliasing the columns identical to the question wording.
 
 ```sql
     SELECT CONCAT(e.TitleOfCourtesy, ' ', 
@@ -202,7 +202,7 @@ I opted to combine name related columns together, as well as aliasing the column
 
 ###### Query
 
-Due to only being restricted to using 4 joins, I could not combine `territories` with `region` whilst also linking to `[Order Details]`, and so could not include `region_description`, something I would have liked to. I chose to format the Sales Total as USD with 2 decimal places, the database of american origin as far as I know. I initially attempted a `WHERE` clause, but due to needing to carry out arithmetic operations, switched to `HAVING`.
+Due to only being restricted to using 4 joins, I could not combine `territories` with `region` whilst also linking to `[Order Details]` (consult [ERD](../img/northwind-er-diagram.png) for context), and so could not include `region_description`, something I would have liked to. I chose to format the Sales Total as USD with 2 decimal places, the database being of american origin as far as I know. I initially attempted a `WHERE` clause, but due to needing to carry out arithmetic operations, switched to `HAVING`.
 
 ```sql
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
@@ -254,9 +254,9 @@ Pretty self explanatory and straightforward.
 
 8. _**Write an SQL Statement to identify the Order Number of the Order with the highest amount(value) of discount applied to that order.**_
 
-I used `TOP 1`, since only a single highest value has ben asked for, using `ORDER BY` to ensure this value is the highest. Again, I have formatted the value to USD.
-
 ###### Query
+
+I used `TOP 1`, since only a single highest value has ben asked for, using `ORDER BY` to ensure this value is the highest. Again, I have formatted the value to USD.
 
 ```sql
     SELECT TOP 1 od.OrderID AS "Order Number",
@@ -283,7 +283,7 @@ I used `TOP 1`, since only a single highest value has ben asked for, using `ORDE
 
 ###### Query
 
-I decided that all values should not be null, since Sparta Global would require all this information about each of their consultants. To ensure the table was successfully created, I ran the `SELECT` as well.
+I decided that all values should not be null, since Sparta Global would require all this information about each of their consultants. To ensure the table was successfully created, I ran the `SELECT` as well. It is worth noting that I also included `DROP TABLE spartans_table` in the [query file](../project/SQLQuery_sqlminiproject.sql) for use when necessary.
 
 ```sql
     CREATE TABLE spartans_table
@@ -384,7 +384,7 @@ Prior to attempting this query, I was not aware one could join a table to itself
 
 ###### Query
 
-I initially tried formatting Sales Total as USD, but encountered some issues when creating the bar chart, therefore sitcking to just `CONVERT`, in order to limit decimal places.
+I initially tried formatting Sales Total as USD, but encountered some issues when creating the bar chart, therefore sitcking to just `CONVERT`, in order to limit decimal places. I order by Company Name with Excel in mind, this being my preferred way of displayng the bar chart.
 
 ```sql
     SELECT s.CompanyName AS "Company Name",
@@ -446,7 +446,7 @@ I chose to order by company name rather than Sales Total, thus giving a less uni
 
 ###### Query
 
-I intially hard coded the latest year, but after gaining some feedback from my trainer, reluctantly implement a subquery to find it. I must admit it is a safer and future proof approach.
+I intially hard coded the latest year, but after gaining some feedback from my trainer, reluctantly implemented a subquery to find it. I must admit it is a much safer and future proof approach.
 
 ```sql
     SELECT TOP 10 c.CompanyName,
