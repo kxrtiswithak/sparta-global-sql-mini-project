@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="../img/northwind-er-diagram.png">
+  <a href="../img/northwind-er-diagram.png" target="_blank">
     <img alt="Azure Data Studio Icon" src="../img/SQLIcon.png" width="120" />
   </a>
 </p>
@@ -44,7 +44,7 @@ _This exercise requires you to know the following aspects of SQL:_
 
 ###### Query
 
-I attempted to adopt this [SQL Style Guide](https://www.sqlstyle.guide/) for my indentation to make my queries as readable as possible. I try to implement column aliasing wherever I can to ensure accuracy and prevent errors, as well as Azure providing code completion when doing so. I concatenated all the address columns for simplicity.
+I attempted to adopt this [SQL Style Guide](https://www.sqlstyle.guide/){:target="_blank"} for my indentation to make my queries as readable as possible. I try to implement column aliasing wherever I can to ensure accuracy and prevent errors, as well as Azure providing code completion when doing so. I concatenated all the address columns for simplicity.
       
 ```sql
     SELECT c.CustomerID AS "Customer ID", 
@@ -202,7 +202,7 @@ I opted to combine Employee Name related columns together, as well as aliasing t
 
 ###### Query
 
-Due to only being restricted to using 4 joins, I could not combine `territories` with `region` whilst also linking to `[Order Details]` (consult [ERD](../img/northwind-er-diagram.png) for context), and so could not include `region_description`, something I would have liked to. I chose to format the Sales Total as USD with 2 decimal places, the database being of american origin as far as I know. I initially attempted a `WHERE` clause, but due to needing to carry out arithmetic operations, switched to `HAVING`.
+Due to only being restricted to using 4 joins, I could not combine `territories` with `region` whilst also linking to `[Order Details]` (consult [ERD](../img/northwind-er-diagram.png){:target="_blank"} for context), and so could not include `region_description`, something I would have liked to. I chose to format the Sales Total as USD with 2 decimal places, the database being of american origin as far as I know. I initially attempted a `WHERE` clause, but due to needing to carry out arithmetic operations, switched to `HAVING`.
 
 ```sql
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
@@ -283,7 +283,7 @@ I used `TOP 1`, since only a single highest value has ben asked for, using `ORDE
 
 ###### Query
 
-I decided that all values should not be null, since Sparta Global would require all this information about each of their consultants. To ensure the table was successfully created, I ran the `SELECT` as well. It is worth noting that I also included `DROP TABLE spartans_table` in the [query file](../project/SQLQuery_sqlminiproject.sql) for use when necessary.
+I decided that all values should not be null, since Sparta Global would require all this information about each of their consultants. To ensure the table was successfully created, I ran the `SELECT` as well. It is worth noting that I also included `DROP TABLE spartans_table` in the [query file](../project/SQLQuery_sqlminiproject.sql){:target="_blank"} for use when necessary.
 
 ```sql
     CREATE TABLE spartans_table
@@ -432,7 +432,7 @@ I initially tried formatting Sales Total as USD, but encountered some issues whe
 
 ###### Bar Chart
 
-I chose to order by company name rather than Sales Total, thus giving a less uniform look to the data, instead providing variance. There is, however, [the bar chart ordered by Sales Total](../img//barchart_ordered_by_sales_total.png) for those that prefer it. 
+I chose to order by company name rather than Sales Total, thus giving a less uniform look to the data, instead providing variance. There is, however, [the bar chart ordered by Sales Total](../img//barchart_ordered_by_sales_total.png){:target="_blank"} for those that prefer it. 
 
 <p align="center">
   <a href="../img/barchart_ordered_by_company_name.png">
@@ -529,7 +529,7 @@ I extracted the first 7 characters from Order Date, converting it into a date fo
 Little explanation is required. I encountered some minor difficulty when formatting the date, due to Excel classing `Date` as text, nothing a quick ~~google~~ DuckDuckGo couldn't fix.
 
 <p align="center">
-  <a href="../img/linechart.png">
+  <a href="../img/linechart.png" target="_blank">
     <img alt="Average Ship Time By Month" src="../img/linechart.png" width="750" />
   </a>
 </p>
