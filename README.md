@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">:globe_with_meridians: SQL Mini Project :globe_with_meridians:</h1>
 
----
+<br>
 
 Documents a collection of SQL queries and responses in accordance to the questions provided. A project assigned by Sparta Global to apply lessons learned from SQL training. 
 
