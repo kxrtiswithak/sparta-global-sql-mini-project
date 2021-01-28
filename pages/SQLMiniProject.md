@@ -172,30 +172,25 @@ Due to category names being unique, I could group by this column, otherwise I wo
 
 ###### Query
 
-I opted to combine Employee Name related columns together, as well as aliasing the columns identical to the question wording.
+I opted to combine Employee Name related columns together, as well as aliasing the columns identical to the question wording. I initially incorrectly read the question and didn't filter the country. I need to proof-read more...
 
 ```sql
     SELECT CONCAT(e.TitleOfCourtesy, ' ', 
                   e.FirstName, ' ', 
                   e.LastName) AS "Employee Name",
            e.City AS "City of Residence"
-      FROM Employees AS e 
+      FROM Employees AS e
+     WHERE e.Country = 'UK';
 ```
 
 ###### Response
 
-| Employee Name         | City of Residence |
-|-----------------------|-------------------|
-| Ms. Nancy Davolio     | Seattle           |
-| Dr. Andrew Fuller     | Tacoma            |
-| Ms. Janet Leverling   | Kirkland          |
-| Mrs. Margaret Peacock | Redmond           |
-| Mr. Steven Buchanan   | London            |
-| Mr. Michael Suyama    | London            |
-| Mr. Robert King       | London            |
-| Ms. Laura Callahan    | Seattle           |
-| Ms. Anne Dodsworth    | London            |
-
+| Employee Name       | City of Residence |
+|---------------------|-------------------|
+| Mr. Steven Buchanan | London            |
+| Mr. Michael Suyama  | London            |
+| Mr. Robert King     | London            |
+| Ms. Anne Dodsworth  | London            |
 <br>
 
 6. _**List Sales Totals for all Sales Regions (via the Territories table using 4 joins) with a Sales Total greater than 1,000,000. Use rounding or FORMAT to present the numbers.**_ 

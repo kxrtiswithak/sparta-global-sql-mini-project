@@ -41,7 +41,8 @@ USE Northwind;
                   e.FirstName, ' ', 
                   e.LastName) AS "Employee Name",
            e.City AS "City of Residence"
-      FROM Employees AS e 
+      FROM Employees AS e
+     WHERE e.Country = 'UK';
       
     -- 1.6	List Sales Totals for all Sales Regions (via the Territories table using 4 joins) with a Sales Total greater than 1,000,000. Use rounding or FORMAT to present the numbers. 
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
