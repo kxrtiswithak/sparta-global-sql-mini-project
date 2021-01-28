@@ -23,16 +23,16 @@ USE Northwind;
            s.CompanyName AS "Supplier Name",
            s.Country
       FROM Products AS p
-      JOIN Suppliers AS s 
-        ON p.SupplierID = s.SupplierID
-     WHERE p.QuantityPerUnit LIKE '%bottles';
+           INNER JOIN Suppliers AS s 
+              ON p.SupplierID = s.SupplierID
+     WHERE p.QuantityPerUnit LIKE '%bottle%';
 
     -- 1.4	Write an SQL Statement that shows how many products there are in each category. Include Category Name in result set and list the highest number first.
     SELECT c.CategoryName AS "Category Name",
            COUNT(p.ProductID) AS "No. of Items"
       FROM Categories AS c
-      JOIN Products AS p 
-        ON c.CategoryID = p.CategoryID
+           INNER JOIN Products AS p 
+              ON c.CategoryID = p.CategoryID
      GROUP BY c.CategoryName
      ORDER BY "No. of Items" DESC;
 
@@ -48,14 +48,14 @@ USE Northwind;
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
            FORMAT(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 'C2', 'en-us') AS "Sales Total"
       FROM Territories AS t
-           JOIN EmployeeTerritories AS et 
-             ON t.TerritoryID = et.TerritoryID
-           JOIN Employees AS e 
-             ON et.EmployeeID = e.EmployeeID
-           JOIN Orders AS o 
-             ON e.EmployeeID = o.EmployeeID
-           JOIN [Order Details] AS od 
-             ON o.OrderID = od.OrderID
+           INNER JOIN EmployeeTerritories AS et 
+              ON t.TerritoryID = et.TerritoryID
+           INNER JOIN Employees AS e 
+              ON et.EmployeeID = e.EmployeeID
+           INNER JOIN Orders AS o 
+              ON e.EmployeeID = o.EmployeeID
+           INNER JOIN [Order Details] AS od 
+              ON o.OrderID = od.OrderID
      GROUP BY t.RegionID
     HAVING SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) > 1000000
      ORDER BY t.RegionID;
@@ -135,10 +135,10 @@ USE kurtis_db;
     SELECT s.CompanyName AS "Company Name",
            CONVERT(real, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 0) AS "Sales Total"
       FROM Suppliers AS s
-           JOIN Products AS p 
-             ON s.SupplierID = p.SupplierID
-           JOIN [Order Details] AS od 
-             ON p.ProductID = od.ProductID
+           INNER JOIN Products AS p 
+              ON s.SupplierID = p.SupplierID
+           INNER JOIN [Order Details] AS od 
+              ON p.ProductID = od.ProductID
      GROUP BY s.CompanyName
     HAVING SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) > 10000
     ORDER BY "Company Name";
@@ -147,14 +147,13 @@ USE kurtis_db;
     SELECT TOP 10 c.CompanyName,
            CONVERT(real, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 0) AS "Orders Total"
       FROM Customers AS c
-           JOIN Orders AS o 
-             ON c.CustomerID = o.CustomerID
-           JOIN [Order Details] AS od 
-             ON o.OrderID = od.OrderID
+           INNER JOIN Orders AS o 
+              ON c.CustomerID = o.CustomerID
+           INNER JOIN [Order Details] AS od 
+              ON o.OrderID = od.OrderID
      WHERE YEAR(o.OrderDate) = (
-           SELECT TOP 1 YEAR(o.ShippedDate)
-             FROM Orders AS o 
-            ORDER BY o.ShippedDate DESC)
+           SELECT MAX(YEAR(o.ShippedDate))
+             FROM Orders AS o)
        AND o.ShippedDate IS NOT NULL
      GROUP BY c.CompanyName
      ORDER BY "Orders Total" DESC;

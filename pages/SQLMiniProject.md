@@ -77,12 +77,12 @@ I attempted to adopt this <a href="https://www.sqlstyle.guide/" target="_blank">
 
 ###### Query
 
-I opted to use a wildcard on the only column in the table where the term `bottles` was present.
+I opted to use a wildcard on the only column in the table where the term `bottles` was present. Due to their being one row containing `bottle`, so later changed from `%bottles%` to `%bottle%`.
 
 ```sql
     SELECT p.ProductName AS "Product Name"
       FROM Products AS p
-     WHERE p.QuantityPerUnit LIKE '%bottles';
+     WHERE p.QuantityPerUnit LIKE '%bottle%';
 ```
 
 ###### Response
@@ -114,9 +114,9 @@ A simple `JOIN` sufficed for adding the two desired columns.
            s.CompanyName AS "Supplier Name",
            s.Country
       FROM Products AS p
-      JOIN Suppliers AS s 
-        ON p.SupplierID = s.SupplierID
-     WHERE p.QuantityPerUnit LIKE '%bottles';
+           INNER JOIN Suppliers AS s 
+              ON p.SupplierID = s.SupplierID
+     WHERE p.QuantityPerUnit LIKE '%bottle%';
 ```
 
 ###### Response
@@ -147,8 +147,8 @@ Due to category names being unique, I could group by this column, otherwise I wo
     SELECT c.CategoryName AS "Category Name",
            COUNT(p.ProductID) AS "No. of Items"
       FROM Categories AS c
-      JOIN Products AS p 
-        ON c.CategoryID = p.CategoryID
+           INNER JOIN Products AS p 
+              ON c.CategoryID = p.CategoryID
      GROUP BY c.CategoryName
      ORDER BY "No. of Items" DESC;
 ```
@@ -191,6 +191,7 @@ I opted to combine Employee Name related columns together, as well as aliasing t
 | Mr. Michael Suyama  | London            |
 | Mr. Robert King     | London            |
 | Ms. Anne Dodsworth  | London            |
+
 <br>
 
 6. _**List Sales Totals for all Sales Regions (via the Territories table using 4 joins) with a Sales Total greater than 1,000,000. Use rounding or FORMAT to present the numbers.**_ 
@@ -203,14 +204,14 @@ Due to only being restricted to using 4 joins, I could not combine `territories`
     SELECT DISTINCT t.RegionID AS "Sales Region ID", 
            FORMAT(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 'C2', 'en-us') AS "Sales Total"
       FROM Territories AS t
-           JOIN EmployeeTerritories AS et 
-             ON t.TerritoryID = et.TerritoryID
-           JOIN Employees AS e 
-             ON et.EmployeeID = e.EmployeeID
-           JOIN Orders AS o 
-             ON e.EmployeeID = o.EmployeeID
-           JOIN [Order Details] AS od 
-             ON o.OrderID = od.OrderID
+           INNER JOIN EmployeeTerritories AS et 
+              ON t.TerritoryID = et.TerritoryID
+           INNER JOIN Employees AS e 
+              ON et.EmployeeID = e.EmployeeID
+           INNER JOIN Orders AS o 
+              ON e.EmployeeID = o.EmployeeID
+           INNER JOIN [Order Details] AS od 
+              ON o.OrderID = od.OrderID
      GROUP BY t.RegionID
     HAVING SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) > 1000000
      ORDER BY t.RegionID;
@@ -387,10 +388,10 @@ I initially tried formatting Sales Total as USD, but encountered some issues whe
     SELECT s.CompanyName AS "Company Name",
            CONVERT(real, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 0) AS "Sales Total"
       FROM Suppliers AS s
-           JOIN Products AS p 
-             ON s.SupplierID = p.SupplierID
-           JOIN [Order Details] AS od 
-             ON p.ProductID = od.ProductID
+           INNER JOIN Products AS p 
+              ON s.SupplierID = p.SupplierID
+           INNER JOIN [Order Details] AS od 
+              ON p.ProductID = od.ProductID
      GROUP BY s.CompanyName
     HAVING SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) > 10000
     ORDER BY "Company Name";
@@ -449,14 +450,13 @@ I intially hard coded the latest year, but after gaining some feedback from my t
     SELECT TOP 10 c.CompanyName,
            CONVERT(real, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 0) AS "Orders Total"
       FROM Customers AS c
-           JOIN Orders AS o 
-             ON c.CustomerID = o.CustomerID
-           JOIN [Order Details] AS od 
-             ON o.OrderID = od.OrderID
+           INNER JOIN Orders AS o 
+              ON c.CustomerID = o.CustomerID
+           INNER JOIN [Order Details] AS od 
+              ON o.OrderID = od.OrderID
      WHERE YEAR(o.OrderDate) = (
-           SELECT TOP 1 YEAR(o.ShippedDate)
-             FROM Orders AS o 
-            ORDER BY o.ShippedDate DESC)
+           SELECT MAX(YEAR(o.ShippedDate))
+             FROM Orders AS o)
        AND o.ShippedDate IS NOT NULL
      GROUP BY c.CompanyName
      ORDER BY "Orders Total" DESC;
