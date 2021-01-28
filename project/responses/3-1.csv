@@ -1,5 +1,6 @@
 Employee Name,Reports To
 Nancy Davolio,Andrew Fuller
+Andrew Fuller,NULL
 Janet Leverling,Andrew Fuller
 Margaret Peacock,Andrew Fuller
 Steven Buchanan,Andrew Fuller

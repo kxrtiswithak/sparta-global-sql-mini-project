@@ -358,10 +358,10 @@ I chose to state the columns I was inputting, so as to ensure no errors occured 
 Prior to attempting this query, I was not aware one could join a table to itself, something that I was pleasantly surprised by.
 
 ```sql
-    SELECT CONCAT(e.FirstName, ' ', e.LastName) AS "Employee Name",
-           CONCAT(b.FirstName, ' ', b.LastName) AS "Reports To"
+    SELECT e.FirstName + ' ' + e.LastName AS "Employee Name",
+           b.FirstName + ' ' + b.LastName AS "Reports To"
       FROM Employees AS e
-           JOIN Employees AS b 
+           LEFT JOIN Employees AS b 
              ON e.ReportsTo = b.EmployeeID;
 ```
 
@@ -370,6 +370,7 @@ Prior to attempting this query, I was not aware one could join a table to itself
 | Employee Name    | Reports To      |
 |------------------|-----------------|
 | Nancy Davolio    | Andrew Fuller   |
+| Andrew Fuller    | NULL            |
 | Janet Leverling  | Andrew Fuller   |
 | Margaret Peacock | Andrew Fuller   |
 | Steven Buchanan  | Andrew Fuller   |

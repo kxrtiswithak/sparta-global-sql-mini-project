@@ -123,10 +123,10 @@ USE kurtis_db;
 -- Exercise 3 – Northwind Data Analysis linked to Excel (30 marks)
 -- Write SQL statements to extract the data required for the following charts (create these in Excel):
     -- 3.1 List all Employees from the Employees table and who they report to. No Excel required. Include Employee names and ReportTo names. (5 Marks)
-    SELECT CONCAT(e.FirstName, ' ', e.LastName) AS "Employee Name",
-           CONCAT(b.FirstName, ' ', b.LastName) AS "Reports To"
+    SELECT e.FirstName + ' ' + e.LastName AS "Employee Name",
+           b.FirstName + ' ' + b.LastName AS "Reports To"
       FROM Employees AS e
-           JOIN Employees AS b 
+           LEFT JOIN Employees AS b 
              ON e.ReportsTo = b.EmployeeID;
 
     -- 3.2 List all Suppliers with total sales over $10,000 in the Order Details table. Include the Company Name from the Suppliers Table and present as a bar chart as below: (5 Marks)
