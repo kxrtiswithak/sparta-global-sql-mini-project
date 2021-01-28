@@ -68,9 +68,10 @@ USE Northwind;
 
     -- 1.8	Write an SQL Statement to identify the Order Number of the Order with the highest amount(value) of discount applied to that order.
     SELECT TOP 1 od.OrderID AS "Order Number",
-           FORMAT((od.Discount * od.Quantity * od.Discount), 'C2', 'en-us') AS "Value of Discount"
+           FORMAT(SUM(od.UnitPrice * od.Quantity * od.Discount), 'C2', 'en-us') AS "Value of Discount"
       FROM [Order Details] od
-     ORDER BY "Value of Discount" DESC;
+     GROUP BY od.OrderID
+     ORDER BY SUM(od.UnitPrice * od.Quantity * od.Discount) DESC;
 
 
 CREATE DATABASE kurtis_db;

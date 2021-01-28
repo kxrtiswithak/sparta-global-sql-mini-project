@@ -256,20 +256,21 @@ Pretty self explanatory and straightforward.
 
 ###### Query
 
-I used `TOP 1`, since only a single highest value has ben asked for, using `ORDER BY` to ensure this value is the highest. Again, I have formatted the value to USD.
+I used `TOP 1`, since only a single highest value has ben asked for, using `ORDER BY` to ensure this value is the highest. Again, I have formatted the value to USD. Initially, I made the mistake of assuming `[Order Details]` had `OrderID` as the PK, thus each occurence being unique. However, the ERD diagram shows that the PK is composite, with multiple Order IDs for each product.
 
 ```sql
     SELECT TOP 1 od.OrderID AS "Order Number",
-           FORMAT((od.Discount * od.Quantity * od.Discount), 'C2', 'en-us') AS "Value of Discount"
+           FORMAT(SUM(od.UnitPrice * od.Quantity * od.Discount), 'C2', 'en-us') AS "Value of Discount"
       FROM [Order Details] od
-     ORDER BY "Value of Discount" DESC;
+     GROUP BY od.OrderID
+     ORDER BY SUM(od.UnitPrice * od.Quantity * od.Discount) DESC;
 ```
 
 ###### Response
 
 | Order Number | Value of Discount |
 |--------------|-------------------|
-| 10595        | $7.50             |
+| 11030        | $3,706.85         |
 
 <div id='ex2'/>
 
