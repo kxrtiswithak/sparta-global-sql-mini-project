@@ -382,7 +382,7 @@ Prior to attempting this query, I was not aware one could join a table to itself
 
 ###### Query
 
-I initially tried formatting Sales Total as USD, but encountered some issues when creating the bar chart, therefore sitcking to just `CONVERT`, in order to limit decimal places. I order by Company Name with Excel in mind, this being my preferred way of displayng the bar chart.
+I initially tried formatting Sales Total as USD, but encountered some issues when creating the bar chart due to data types, therefore sticking to just `CONVERT`, ensuring the type remained `number`, as well as to limit decimal places. I order by Company Name with Excel in mind, this being my preferred way of displayng the bar chart.
 
 ```sql
     SELECT s.CompanyName AS "Company Name",
